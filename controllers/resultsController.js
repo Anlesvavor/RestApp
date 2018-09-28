@@ -1,30 +1,32 @@
 const express = require('express');
 
 function sum(req, res, next){
-    
-    let z = parseInt(req.params.n1) + parseInt(req.params.n2);
-    res.json(`${z}`);
+    let x = parseInt(req.params.n1);
+    let y = parseInt(req.params.n2);
+    x = x + y;
+    res.send(`${x}`);
 };
 
 function multiplication(req, res, next){
-    n1 = parseInt(req.body.n1);
-    n2 = parseInt(req.body.n2);
-    
-    res.send(`${req.body.n1 * req.body.n2}`);
+    let x = parseInt(req.params.n1);
+    let y = parseInt(req.params.n2);
+    x = x * y;
+    res.send(`${x}`);
 };
 
 function divide(req, res, next){
-    n1 = parseInt(req.body.n1);
-    n2 = parseInt(req.body.n2);
+    let x = parseInt(req.params.n1);
+    let y = parseInt(req.params.n2);
+    x = y == 0 ? "indefinido" : x / y;
     
-    res.send(`${(req.body.n2 != 0)? req.body.n1 / req.body.n2 : "indefinido"}`);
+    res.send(`${x}`);
 };
 
 function substraction(req, res, next){
-    n1 = parseInt(req.body.n1);
-    n2 = parseInt(req.body.n2);
-    
-    res.send(`${req.body.n1 - req.body.n2}`);
+    let x = parseInt(req.params.n1);
+    let y = parseInt(req.params.n2);
+    x = x - y;
+    res.send(`${x}`);
 };
 
 module.exports = {
