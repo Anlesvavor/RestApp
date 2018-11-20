@@ -4,22 +4,39 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('restapp:server');
-var http = require('http');
+const app = require('../app');
+const debug = require('debug')('restapp:server');
+const http = require('http');
+const mongoose = require('mongoose');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+const server = http.createServer(app);
+
+// Mongodb://<dbuser>:<dbpassword>@<direction>:<port>/<dbName>
+
+const uri = 'mongodb://anlesvavor:ElPerro123@ds147391.mlab.com:47391/drawdb';
+
+mongoose.connect(uri);
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, "No se pudo conecta a la base de datos."));
+
+db.on('open', ()=>{
+    server.listen(port, ()=>{
+        console.log("La conexión a mongodb es exitosa");
+    });
+});
 
 /**
  * Listen on provided port, on all network interfaces.
